@@ -1,6 +1,4 @@
 sudo: false
-os:
-  - linux
 language: node_js
 node_js:
   - "4"
@@ -15,10 +13,8 @@ addons:
       - clang-3.5
       - g++-4.8
 env:
-  matrix:
-    - CXX=g++-4.8 TEST_SUITE=unit
+  - CXX=g++-4.8 TEST_SUITE=unit
 matrix:
-  fast_finish: true
   include:
     - os: linux
       node_js: "6"
