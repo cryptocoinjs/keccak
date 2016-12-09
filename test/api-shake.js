@@ -3,7 +3,6 @@ const test = require('tape')
 const stream = require('stream')
 
 const utf8text = 'УТФ-8 text'
-const utf8buf = Buffer.from(utf8text, 'utf8')
 
 module.exports = (name, createHash) => {
   test(`${name} Shake#_transform`, (t) => {
