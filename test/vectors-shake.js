@@ -20,7 +20,7 @@ module.exports = (name, createHash) => {
       const squeezed = lines[++i].slice(11).toLowerCase()
 
       test(`${name} ${hash} vector#${count++}`, (t) => {
-        t.equal(createHash(hash).update(data, 'hex').squeeze(squeezed.length * 4, 'hex'), squeezed)
+        t.equal(createHash(hash).update(data, 'hex').squeeze(squeezed.length / 2, 'hex'), squeezed)
         t.end()
       })
     }

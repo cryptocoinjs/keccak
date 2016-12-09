@@ -17,7 +17,6 @@ rm -rf ./src/libkeccak
 
 make --directory=./util/KeccakCodePackage ${IMPL}/libkeccak.a.pack
 tar -xf ./util/KeccakCodePackage/bin/${IMPL}_libkeccak.a.tar.gz
-# mv ./${IMPL}/libkeccak.a ./src/libkeccak
 
 mkdir ./src/libkeccak
 for FILE in "${FILES[@]}"

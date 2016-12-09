@@ -75,7 +75,7 @@ module.exports = (name, createHash) => {
     t.test('should throw error after Shake#squeeze', (t) => {
       const hash = createHash('shake256')
 
-      hash.squeeze(256)
+      hash.squeeze(32)
       t.throws(() => {
         hash.update('')
       }, /^Error: Squeeze already called$/)
@@ -96,9 +96,9 @@ module.exports = (name, createHash) => {
     t.test('should not throw error on second call', (t) => {
       const hash = createHash('shake256')
 
-      hash.squeeze(128)
+      hash.squeeze(16)
       t.doesNotThrow(() => {
-        hash.squeeze(128)
+        hash.squeeze(16)
       })
       t.end()
     })
@@ -106,14 +106,14 @@ module.exports = (name, createHash) => {
     t.test('should return buffer by default', (t) => {
       const hash = createHash('shake256')
 
-      t.true(Buffer.isBuffer(hash.squeeze(256)))
+      t.true(Buffer.isBuffer(hash.squeeze(32)))
       t.end()
     })
 
     t.test('should encode result with custom encoding', (t) => {
       const hash = createHash('shake256')
 
-      const squeeze = hash.squeeze(256, 'hex')
+      const squeeze = hash.squeeze(32, 'hex')
       t.equal(typeof squeeze, 'string')
       t.equal(squeeze.length, 64)
       t.end()
@@ -127,11 +127,11 @@ module.exports = (name, createHash) => {
       const hash1 = createHash('shake256')
       const hash2 = hash1._clone()
 
-      const squeeze1 = hash1.squeeze(256, 'hex')
+      const squeezed1 = hash1.squeeze(32, 'hex')
       t.throws(() => {
         hash1.update(Buffer.allocUnsafe(0))
       }, /^Error: Squeeze already called$/)
-      t.equal(hash2.squeeze(256, 'hex'), squeeze1)
+      t.equal(hash2.squeeze(32, 'hex'), squeezed1)
 
       t.end()
     })
