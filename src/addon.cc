@@ -35,8 +35,8 @@ class KeccakWrapper : public Nan::ObjectWrap {
     unsigned int rate = info[0]->IntegerValue();
     unsigned int capacity = info[1]->IntegerValue();
 
-    int result = KeccakWidth1600_SpongeInitialize(&obj->sponge, rate, capacity);
-    if (result != 0) return Nan::ThrowError("Invalid parameters");
+    // ignore return code, rate & capacity always will right because internal object
+    KeccakWidth1600_SpongeInitialize(&obj->sponge, rate, capacity);
   }
 
   static NAN_METHOD(Absorb) {
@@ -45,16 +45,16 @@ class KeccakWrapper : public Nan::ObjectWrap {
     const unsigned char* data = (const unsigned char*) node::Buffer::Data(buffer);
     size_t length = node::Buffer::Length(buffer);
 
-    int result = KeccakWidth1600_SpongeAbsorb(&obj->sponge, data, length);
-    if (result != 0) return Nan::ThrowError("Too late for additional input");
+    // ignore return code, bcause internal object
+    KeccakWidth1600_SpongeAbsorb(&obj->sponge, data, length);
   }
 
   static NAN_METHOD(AbsorbLastFewBits) {
     KeccakWrapper* obj = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info.Holder());
     unsigned char bits = info[0]->IntegerValue();
 
-    int result = KeccakWidth1600_SpongeAbsorbLastFewBits(&obj->sponge, bits);
-    if (result != 0) return Nan::ThrowError("Too late for additional input");
+    // ignore return code, bcause internal object
+    KeccakWidth1600_SpongeAbsorbLastFewBits(&obj->sponge, bits);
   }
 
   static NAN_METHOD(Squeeze) {
