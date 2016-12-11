@@ -1,5 +1,5 @@
 'use strict'
-var test = require('tape')
+const test = require('tape')
 
 function main (name, createHash) {
   require('./vectors-keccak')(name, createHash)
@@ -18,4 +18,6 @@ function main (name, createHash) {
 }
 
 main('bindings', require('../bindings'))
-// test('pure js', require('../js'))
+main('pure js', require('../js'))
+
+require('./js-keccak') // special for js

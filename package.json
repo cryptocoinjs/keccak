@@ -48,6 +48,7 @@
     "browserify": "^13.0.0",
     "node-gyp": "^3.3.1",
     "nyc": "^10.0.0",
+    "proxyquire": "^1.7.10",
     "standard": "*",
     "tape": "^4.5.1"
   },
