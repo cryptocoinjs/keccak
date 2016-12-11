@@ -39,6 +39,17 @@ console.log(hash2.update(' world!').digest('hex'))
 // => ecd0e108a98e192af1d2c25055f4e3bed784b5c877204e73219a5203251feaab
 ```
 
+### Why I should use this package?
+
+I thought it will be popular question, so I decide write explanation in readme.
+
+I know a few popular packages on [npm][4] related with [Keccak][1]:
+
+  - [sha3][5] ([phusion/node-sha3][6] on github) — not actual because support _only keccak_.
+  - [js-sha3][7] ([emn178/js-sha3][8] on github) — brilliant package which support keccak, sha3, shake. But not implement [node Hash][3] interface unfortunately! (Meanwhile works in browser without browserify/wepback and has very impressive performance)
+  - [browserify-sha3][9] ([wanderer/browserify-sha3][10] on github) — based on [js-sha3][7] (but not support shake!). Support [node Hash][3] interface, but without [streams][11].
+  - [keccakjs][12] ([axic/keccakjs][13] on github) — bindings to [sha3][5] and [browserify-sha3][9] as fallback. As result _keccak only_ with [node Hash][3] interface without [streams][11].
+
 ## LICENSE
 
 This library is free and open-source software released under the MIT license.
@@ -46,3 +57,13 @@ This library is free and open-source software released under the MIT license.
 [1]: http://keccak.noekeon.org/
 [2]: https://github.com/gvanas/KeccakCodePackage
 [3]: https://nodejs.org/api/crypto.html#crypto_class_hash
+[4]: http://npmjs.com/
+[5]: https://www.npmjs.com/package/sha3
+[6]: https://github.com/phusion/node-sha3
+[7]: https://www.npmjs.com/package/js-sha3
+[8]: https://github.com/emn178/js-sha3
+[9]: https://www.npmjs.com/package/browserify-sha3
+[10]: https://github.com/wanderer/browserify-sha3
+[11]: http://nodejs.org/api/stream.html
+[12]: https://www.npmjs.com/package/keccakjs
+[13]: https://github.com/axic/keccakjs
