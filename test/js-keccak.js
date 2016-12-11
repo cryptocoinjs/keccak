@@ -7,7 +7,7 @@ const Keccak = proxyquire('../lib/keccak', {
     p1600 () {}
   }
 })
-const keccakState = require('../lib/keccak-state')
+const keccakState = require('../lib/keccak-state-reference')
 
 function to32bin (x) {
   let str = (x >>> 0).toString(2)
