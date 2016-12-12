@@ -46,7 +46,7 @@ I thought it will be popular question, so I decide write explanation in readme.
 I know a few popular packages on [npm][4] related with [Keccak][1]:
 
   - [sha3][5] ([phusion/node-sha3][6] on github) — not actual because support _only keccak_.
-  - [js-sha3][7] ([emn178/js-sha3][8] on github) — brilliant package which support keccak, sha3, shake. But not implement [node Hash][3] interface unfortunately! (Meanwhile works in browser without browserify/wepback and has very impressive performance)
+  - [js-sha3][7] ([emn178/js-sha3][8] on github) — brilliant package which support keccak, sha3, shake. But not implement [node Hash][3] interface unfortunately!
   - [browserify-sha3][9] ([wanderer/browserify-sha3][10] on github) — based on [js-sha3][7] (but not support shake!). Support [node Hash][3] interface, but without [streams][11].
   - [keccakjs][12] ([axic/keccakjs][13] on github) — bindings to [sha3][5] and [browserify-sha3][9] as fallback. As result _keccak only_ with [node Hash][3] interface without [streams][11].
 
