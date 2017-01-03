@@ -7,7 +7,9 @@ extern "C" {
 
 class KeccakWrapper : public Nan::ObjectWrap {
  public:
-  static v8::Local<v8::Function> GetConstructor () {
+  static v8::Local<v8::Function> Init () {
+    Nan::EscapableHandleScope scope;
+
     v8::Local<v8::FunctionTemplate> tpl = Nan::New<v8::FunctionTemplate>(New);
     tpl->SetClassName(Nan::New("KeccakWrapper").ToLocalChecked());
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
@@ -18,7 +20,7 @@ class KeccakWrapper : public Nan::ObjectWrap {
     Nan::SetPrototypeMethod(tpl, "squeeze", Squeeze);
     Nan::SetPrototypeMethod(tpl, "copy", Copy);
 
-    return Nan::GetFunction(tpl).ToLocalChecked();
+    return scope.Escape(Nan::GetFunction(tpl).ToLocalChecked());
   }
 
  private:
@@ -70,7 +72,7 @@ class KeccakWrapper : public Nan::ObjectWrap {
 
   static NAN_METHOD(Copy) {
     KeccakWrapper* from = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info.Holder());
-    KeccakWrapper* to = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info[0].As<v8::Object>());
+    KeccakWrapper* to = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info[0]->ToObject());
 
     memcpy(&to->sponge, &from->sponge, sizeof(KeccakWidth1600_SpongeInstance));
   }
@@ -78,8 +80,7 @@ class KeccakWrapper : public Nan::ObjectWrap {
 
 NAN_MODULE_INIT(Init) {
   // I wish to use pure functions, but we need wrapper around state
-  v8::Local<v8::Function> KeccakConstructor = KeccakWrapper::GetConstructor();
-  Nan::Set(target, Nan::New("Keccak").ToLocalChecked(), KeccakConstructor);
+  Nan::Set(target, Nan::New("Keccak").ToLocalChecked(), KeccakWrapper::Init());
 }
 
 NODE_MODULE(keccak, Init)
