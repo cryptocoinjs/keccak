@@ -48,7 +48,7 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "nyc": "^10.0.0",
-    "prebuild": "^5.1.2",
+    "prebuild": "^6.0.0",
     "prebuild-ci": "^1.0.9",
     "proxyquire": "^1.7.10",
     "standard": "*",
