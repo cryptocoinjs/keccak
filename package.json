@@ -35,8 +35,9 @@
     "libkeccak": "./util/libkeccak.sh",
     "lint": "standard",
     "rebuild": "prebuild --compile",
-    "test": "npm run lint && npm run unit && prebuild-ci",
-    "unit": "tape test/index.js"
+    "test": "npm run lint && npm run unit",
+    "unit": "tape test/index.js",
+    "unit-ci": "npm run unit && prebuild-ci"
   },
   "dependencies": {
     "bindings": "^1.2.1",

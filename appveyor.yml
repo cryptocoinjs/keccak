@@ -19,6 +19,6 @@ install:
   - for /f %%i in ('node -v') do set exact_nodejs_version=%%i
   - prebuild -b %exact_nodejs_version% --strip
 test_script:
-  - npm test
+  - npm run unit-ci
 on_success:
   - for %%i in (prebuilds\*) do appveyor PushArtifact %%i
