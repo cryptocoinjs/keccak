@@ -1,6 +1,6 @@
 {
   "name": "keccak",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Keccak sponge function family",
   "keywords": [
     "sha3",
