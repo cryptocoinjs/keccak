@@ -3,7 +3,7 @@ const test = require('tape')
 const proxyquire = require('proxyquire')
 
 const Keccak = proxyquire('../lib/keccak', {
-  './keccak-state': {
+  './keccak-state-unroll': {
     p1600 () {}
   }
 })
