@@ -78,9 +78,9 @@ class KeccakWrapper : public Nan::ObjectWrap {
   }
 };
 
-NAN_MODULE_INIT(Init) {
-  // I wish to use pure functions, but we need wrapper around state
-  Nan::Set(target, Nan::New("Keccak").ToLocalChecked(), KeccakWrapper::Init());
+void Init(Nan::ADDON_REGISTER_FUNCTION_ARGS_TYPE exports, Nan::ADDON_REGISTER_FUNCTION_ARGS_TYPE module) {
+  // I wish to use pure functions, but we need wrapper around state (KeccakWidth1600_SpongeInstance)
+  Nan::Set(module, Nan::New("exports").ToLocalChecked(), KeccakWrapper::Init());
 }
 
 NODE_MODULE(keccak, Init)

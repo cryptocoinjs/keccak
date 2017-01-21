@@ -34,7 +34,7 @@
     "install": "prebuild-install || node-gyp rebuild || echo \"Keccak bindings compilation fail. Pure JS implementation will be used.\"",
     "libkeccak": "./util/libkeccak.sh",
     "lint": "standard",
-    "rebuild": "prebuild --compile",
+    "rebuild": "node-gyp rebuild",
     "test": "npm run lint && npm run unit",
     "unit": "tape test/index.js",
     "unit-ci": "npm run unit && prebuild-ci"

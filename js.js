@@ -1,2 +1,2 @@
 'use strict'
-module.exports = require('./lib/api')({ Keccak: require('./lib/keccak') })
+module.exports = require('./lib/api')(require('./lib/keccak'))
