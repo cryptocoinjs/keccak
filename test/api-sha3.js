@@ -23,7 +23,7 @@ module.exports = (name, createHash) => {
 
       t.plan(1)
       hash.update = () => { throw err }
-      hash._transform(Buffer.allocUnsafe(0), 'buffer', (_err) => t.true(_err === err))
+      hash._transform(new Buffer(0), 'buffer', (_err) => t.true(_err === err))
       t.end()
     })
 
@@ -33,7 +33,7 @@ module.exports = (name, createHash) => {
   test(`${name} Keccak#_flush`, (t) => {
     t.test('should use Keccak#digest', (t) => {
       const hash = createHash('sha3-256')
-      const buffer = Buffer.allocUnsafe(0)
+      const buffer = new Buffer(0)
 
       t.plan(2)
       hash.push = (data) => t.true(data === buffer)
@@ -78,7 +78,7 @@ module.exports = (name, createHash) => {
     t.test('should return `this`', (t) => {
       const hash = createHash('sha3-256')
 
-      t.same(hash.update(Buffer.allocUnsafe(0)), hash)
+      t.same(hash.update(new Buffer(0)), hash)
       t.end()
     })
 
