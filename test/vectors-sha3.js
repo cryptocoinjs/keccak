@@ -1,11 +1,10 @@
 'use strict'
 const test = require('tape')
-const path = require('path')
 const fs = require('fs')
 
 module.exports = (name, createHash) => {
-  for (let hash of ['sha3-224', 'sha3-256', 'sha3-384', 'sha3-512']) {
-    const filename = path.join(__dirname, '..', 'util', 'KeccakCodePackage', 'TestVectors', `ShortMsgKAT_${hash.toUpperCase()}.txt`)
+  for (const hash of ['sha3-224', 'sha3-256', 'sha3-384', 'sha3-512']) {
+    const filename = require.resolve(`../util/KeccakCodePackage/TestVectors/ShortMsgKAT_${hash.toUpperCase()}.txt`)
     const content = fs.readFileSync(filename, 'utf8')
     const lines = content.split('\n')
 
