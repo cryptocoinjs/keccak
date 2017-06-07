@@ -1,4 +1,5 @@
 'use strict'
+const Buffer = require('safe-buffer').Buffer
 const test = require('tape')
 const proxyquire = require('proxyquire')
 
@@ -18,7 +19,7 @@ function to32bin (x) {
 test('absorb', (t) => {
   const keccak = new Keccak()
   keccak.initialize(56, 1544)
-  keccak.absorb(new Buffer(10).fill(0x01))
+  keccak.absorb(Buffer.alloc(10, 0x01))
 
   t.equal(keccak.state[0], (0x01 << 24))
   t.equal(keccak.state[1], (0x01 << 16) | (0x01 << 8) | (0x01 << 0))
@@ -48,7 +49,7 @@ test('absorbLastFewBits', (t) => {
 test('squeeze', (t) => {
   const keccak = new Keccak()
   keccak.initialize(56, 1544)
-  keccak.absorb(new Buffer(5).fill(0x01))
+  keccak.absorb(Buffer.alloc(5, 0x01))
 
   t.equal(keccak.squeeze(7).toString('hex'), '01010101010180')
   t.equal(keccak.squeeze(3).toString('hex'), '010101')

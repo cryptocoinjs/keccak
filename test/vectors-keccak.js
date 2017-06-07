@@ -1,4 +1,5 @@
 'use strict'
+const Buffer = require('safe-buffer').Buffer
 const test = require('tape')
 
 const vectors = [{
@@ -12,7 +13,7 @@ const vectors = [{
 module.exports = (name, createHash) => {
   for (let i = 0; i < vectors.length; ++i) {
     const vector = vectors[i]
-    const data = new Buffer(vector.input, 'hex')
+    const data = Buffer.from(vector.input, 'hex')
 
     for (let hash of ['keccak224', 'keccak256', 'keccak384', 'keccak512']) {
       test(`${name} ${hash} vector#${i}`, (t) => {

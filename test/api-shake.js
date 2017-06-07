@@ -1,4 +1,5 @@
 'use strict'
+const Buffer = require('safe-buffer').Buffer
 const test = require('tape')
 const stream = require('stream')
 
@@ -24,7 +25,7 @@ module.exports = (name, createHash) => {
 
       t.plan(1)
       hash.update = () => { throw err }
-      hash._transform(new Buffer(0), 'buffer', (_err) => t.true(_err === err))
+      hash._transform(Buffer.alloc(0), 'buffer', (_err) => t.true(_err === err))
       t.end()
     })
 
@@ -42,7 +43,7 @@ module.exports = (name, createHash) => {
         }
       })
 
-      let data = new Buffer(0)
+      let data = Buffer.alloc(0)
       const squeezed = '46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762f'
       const dst = stream.Writable({
         write (chunk, encoding, callback) {
@@ -84,7 +85,7 @@ module.exports = (name, createHash) => {
     t.test('should return `this`', (t) => {
       const hash = createHash('shake256')
 
-      t.same(hash.update(new Buffer(0)), hash)
+      t.same(hash.update(Buffer.alloc(0)), hash)
       t.end()
     })
 
@@ -128,7 +129,7 @@ module.exports = (name, createHash) => {
 
       const squeezed1 = hash1.squeeze(32, 'hex')
       t.throws(() => {
-        hash1.update(new Buffer(0))
+        hash1.update(Buffer.alloc(0))
       }, /^Error: Squeeze already called$/)
       t.equal(hash2.squeeze(32, 'hex'), squeezed1)
 
