@@ -16,10 +16,25 @@ function to32bin (x) {
   return `0b${str}`
 }
 
-test('absorb', (t) => {
+test('absorb (Buffer)', (t) => {
   const keccak = new Keccak()
   keccak.initialize(56, 1544)
   keccak.absorb(Buffer.alloc(10, 0x01))
+
+  t.equal(keccak.state[0], (0x01 << 24))
+  t.equal(keccak.state[1], (0x01 << 16) | (0x01 << 8) | (0x01 << 0))
+  t.equal(keccak.state[2], 0)
+  t.equal(keccak.blockSize, 7)
+  t.equal(keccak.count, 3)
+  t.equal(keccak.squeezing, false)
+
+  t.end()
+})
+
+test('absorb (Uint8Array)', (t) => {
+  const keccak = new Keccak()
+  keccak.initialize(56, 1544)
+  keccak.absorb(new Uint8Array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]))
 
   t.equal(keccak.state[0], (0x01 << 24))
   t.equal(keccak.state[1], (0x01 << 16) | (0x01 << 8) | (0x01 << 0))
@@ -46,10 +61,29 @@ test('absorbLastFewBits', (t) => {
   t.end()
 })
 
-test('squeeze', (t) => {
+test('squeeze (Buffer)', (t) => {
   const keccak = new Keccak()
   keccak.initialize(56, 1544)
   keccak.absorb(Buffer.alloc(5, 0x01))
+
+  t.equal(keccak.squeeze(7).toString('hex'), '01010101010180')
+  t.equal(keccak.squeeze(3).toString('hex'), '010101')
+  t.equal(keccak.squeeze(4).toString('hex'), '01010180')
+
+  t.equal(keccak.state[0], (0x01 << 24) | (0x01 << 16) | (0x01 << 8) | (0x01 << 0))
+  t.equal(keccak.state[1], (0x80 << 16) | (0x01 << 8) | (0x01 << 0))
+  t.equal(keccak.state[2], 0)
+  t.equal(keccak.blockSize, 7)
+  t.equal(keccak.count, 0)
+  t.equal(keccak.squeezing, true)
+
+  t.end()
+})
+
+test('squeeze (Uint8Array)', (t) => {
+  const keccak = new Keccak()
+  keccak.initialize(56, 1544)
+  keccak.absorb(new Uint8Array([1, 1, 1, 1, 1]))
 
   t.equal(keccak.squeeze(7).toString('hex'), '01010101010180')
   t.equal(keccak.squeeze(3).toString('hex'), '010101')

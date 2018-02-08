@@ -57,12 +57,12 @@ module.exports = (name, createHash) => {
   })
 
   test(`${name} Keccak#update`, (t) => {
-    t.test('only string or buffer is allowed', (t) => {
+    t.test('only string, buffer or Uint8Array is allowed', (t) => {
       const hash = createHash('sha3-256')
 
       t.throws(() => {
         hash.update(null)
-      }, /^TypeError: Data must be a string or a buffer$/)
+      }, /^TypeError: Data must be a string, buffer or Uint32Array$/)
       t.end()
     })
 
