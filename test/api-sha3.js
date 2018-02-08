@@ -62,7 +62,7 @@ module.exports = (name, createHash) => {
 
       t.throws(() => {
         hash.update(null)
-      }, /^TypeError: Data must be a string, buffer or Uint32Array$/)
+      }, /^TypeError: Data must be a string, buffer or Uint8Array$/)
       t.end()
     })
 
