@@ -2,7 +2,13 @@
 #include <nan.h>
 
 extern "C" {
-  #include "libkeccak/KeccakSponge.h"
+#if LIBKECCAK == 32
+  #include "libkeccak-32/KeccakSpongeWidth1600.h"
+#elif LIBKECCAK == 64
+  #include "libkeccak-64/KeccakSpongeWidth1600.h"
+#else
+  #error "LIBKECCAK not defined correctly"
+#endif
 }
 
 class KeccakWrapper : public Nan::ObjectWrap {
