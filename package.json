@@ -32,7 +32,6 @@
     "coverage": "nyc tape test/index.js",
     "coverage-lcov": "npm run coverage && nyc report -r lcov",
     "install": "npm run rebuild || echo \"Keccak bindings compilation fail. Pure JS implementation will be used.\"",
-    "libkeccak": "./util/libkeccak.sh",
     "lint": "standard",
     "rebuild": "node-gyp rebuild",
     "test": "npm run lint && npm run unit",

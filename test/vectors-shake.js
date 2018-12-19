@@ -4,7 +4,7 @@ const fs = require('fs')
 
 module.exports = (name, createHash) => {
   for (const hash of ['shake128', 'shake256']) {
-    const filename = require.resolve(`../util/KeccakCodePackage/TestVectors/ShortMsgKAT_${hash.toUpperCase()}.txt`)
+    const filename = require.resolve(`../util/XKCP/tests/TestVectors/ShortMsgKAT_${hash.toUpperCase()}.txt`)
     const content = fs.readFileSync(filename, 'utf8')
     const lines = content.split('\n')
 
