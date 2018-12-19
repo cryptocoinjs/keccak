@@ -1,12 +1,13 @@
 # Importing Keccak C code
 
-The XKCP project contains various implementations of Keccak-related algorithms.  These are the steps to select a specific implementation and import the code into our project.
+The XKCP project contains various implementations of Keccak-related algorithms. These are the steps to select a specific implementation and import the code into our project.
 
 First, generate the source bundles in XKCP:
 
 ```
-git clone git@github.com:XKCP/XKCP.git
+git clone https://github.com/XKCP/XKCP.git
 cd XKCP
+git checkout 58b20ec
 
 # Edit "Makefile.build".  After all the <fragment> tags, add the following two <target> tags:
 <target name="node32" inherits="KeccakSpongeWidth1600 inplace1600bi"/>
@@ -24,4 +25,4 @@ The source files we need are now under XKCP's "bin/.pack/npm32/" and "bin/.pack/
 
 Currently, we're using two of XKCP KeccakP[1600] implementations -- the generic 32-bit-optimized one and the generic 64-bit-optimized one.
 
-XKCP has implementations that use CPU-specific instructions (e.g. Intel AVR) and are likely much faster.  It might be worth using those.
+XKCP has implementations that use CPU-specific instructions (e.g. Intel AVR) and are likely much faster. It might be worth using those.
