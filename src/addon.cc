@@ -40,8 +40,13 @@ class KeccakWrapper : public Nan::ObjectWrap {
 
   static NAN_METHOD(Initialize) {
     KeccakWrapper* obj = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info.Holder());
+#if (NODE_MODULE_VERSION >= NODE_7_0_MODULE_VERSION)
+    unsigned int rate = info[0]->IntegerValue(info.GetIsolate()->GetCurrentContext()).ToChecked();
+    unsigned int capacity = info[1]->IntegerValue(info.GetIsolate()->GetCurrentContext()).ToChecked();
+#else
     unsigned int rate = info[0]->IntegerValue();
     unsigned int capacity = info[1]->IntegerValue();
+#endif
 
     // ignore return code, rate & capacity always will right because internal object
     KeccakWidth1600_SpongeInitialize(&obj->sponge, rate, capacity);
@@ -59,7 +64,11 @@ class KeccakWrapper : public Nan::ObjectWrap {
 
   static NAN_METHOD(AbsorbLastFewBits) {
     KeccakWrapper* obj = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info.Holder());
+#if (NODE_MODULE_VERSION >= NODE_7_0_MODULE_VERSION)
+    unsigned char bits = info[0]->IntegerValue(info.GetIsolate()->GetCurrentContext()).ToChecked();
+#else
     unsigned char bits = info[0]->IntegerValue();
+#endif
 
     // ignore return code, bcause internal object
     KeccakWidth1600_SpongeAbsorbLastFewBits(&obj->sponge, bits);
@@ -67,7 +76,11 @@ class KeccakWrapper : public Nan::ObjectWrap {
 
   static NAN_METHOD(Squeeze) {
     KeccakWrapper* obj = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info.Holder());
+#if (NODE_MODULE_VERSION >= NODE_7_0_MODULE_VERSION)
+    size_t length = info[0]->IntegerValue(info.GetIsolate()->GetCurrentContext()).ToChecked();
+#else
     size_t length = info[0]->IntegerValue();
+#endif
 
     v8::Local<v8::Object> buffer = Nan::NewBuffer(length).ToLocalChecked();
     unsigned char* data = (unsigned char*) node::Buffer::Data(buffer);
@@ -78,7 +91,11 @@ class KeccakWrapper : public Nan::ObjectWrap {
 
   static NAN_METHOD(Copy) {
     KeccakWrapper* from = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info.Holder());
+#if (NODE_MODULE_VERSION >= NODE_7_0_MODULE_VERSION)
+    KeccakWrapper* to = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info[0]->ToObject(info.GetIsolate()->GetCurrentContext()).ToLocalChecked());
+#else
     KeccakWrapper* to = Nan::ObjectWrap::Unwrap<KeccakWrapper>(info[0]->ToObject());
+#endif
 
     memcpy(&to->sponge, &from->sponge, sizeof(KeccakWidth1600_SpongeInstance));
   }
