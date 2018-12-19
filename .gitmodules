@@ -1,3 +1,0 @@
-[submodule "keccak-src"]
-	path = util/KeccakCodePackage
-	url = https://github.com/gvanas/KeccakCodePackage.git
