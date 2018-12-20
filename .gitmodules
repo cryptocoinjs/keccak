@@ -1,3 +1,3 @@
-[submodule "keccak-src"]
-	path = util/KeccakCodePackage
-	url = https://github.com/gvanas/KeccakCodePackage.git
+[submodule "util/XKCP"]
+	path = util/XKCP
+	url = https://github.com/XKCP/XKCP.git
