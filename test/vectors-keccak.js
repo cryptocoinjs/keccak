@@ -15,7 +15,7 @@ module.exports = (name, createHash) => {
     const vector = vectors[i]
     const data = Buffer.from(vector.input, 'hex')
 
-    for (let hash of ['keccak224', 'keccak256', 'keccak384', 'keccak512']) {
+    for (const hash of ['keccak224', 'keccak256', 'keccak384', 'keccak512']) {
       test(`${name} ${hash} vector#${i}`, (t) => {
         t.equal(createHash(hash).update(data).digest('hex'), vector[hash])
         t.end()

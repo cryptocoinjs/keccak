@@ -38,20 +38,20 @@
     "unit": "tape test/index.js"
   },
   "dependencies": {
-    "bindings": "^1.2.1",
-    "inherits": "^2.0.3",
-    "nan": "^2.2.1",
-    "safe-buffer": "^5.1.0"
+    "bindings": "^1.5.0",
+    "inherits": "^2.0.4",
+    "nan": "^2.14.0",
+    "safe-buffer": "^5.2.0"
   },
   "devDependencies": {
-    "browserify": "^14.1.0",
-    "nyc": "^11.0.2",
-    "proxyquire": "^1.7.10",
-    "standard": "^10.0.2",
-    "tape": "^4.5.1"
+    "browserify": "^16.5.0",
+    "nyc": "^14.1.1",
+    "proxyquire": "^2.1.3",
+    "standard": "^14.3.1",
+    "tape": "^4.11.0"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=5.12.0"
   },
   "gypfile": true,
   "browser": {

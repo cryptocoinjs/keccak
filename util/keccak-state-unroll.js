@@ -70,8 +70,8 @@ process.stdout.write(`
 `)
 
 for (let x = 0; x < 5; ++x) {
-  let next = (x + 1) % 5
-  let prev = (x + 4) % 5
+  const next = (x + 1) % 5
+  const prev = (x + 4) % 5
 
   process.stdout.write(`
     ${x === 0 ? 'var ' : ''}lo = lo${prev} ^ ${genROL64LO(`lo${next}`, `hi${next}`, 1)}`)

@@ -76,7 +76,7 @@ test('rol64lo', (t) => {
     [0b10000000000000000000000000000000, 0b00000000000000000000000000000000, 63, '0b01000000000000000000000000000000']
   ]
 
-  for (let fixture of fixtures) {
+  for (const fixture of fixtures) {
     t.equal(to32bin(keccakState._rol64lo(fixture[0], fixture[1], fixture[2])), fixture[3])
   }
 
@@ -94,7 +94,7 @@ test('rol64hi', (t) => {
     [0b00000000000000000000000000000000, 0b10000000000000000000000000000000, 63, '0b01000000000000000000000000000000']
   ]
 
-  for (let fixture of fixtures) {
+  for (const fixture of fixtures) {
     t.equal(to32bin(keccakState._rol64hi(fixture[0], fixture[1], fixture[2])), fixture[3])
   }
 
