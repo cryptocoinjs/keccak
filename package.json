@@ -39,9 +39,7 @@
   },
   "dependencies": {
     "bindings": "^1.5.0",
-    "inherits": "^2.0.4",
-    "nan": "^2.14.0",
-    "safe-buffer": "^5.2.0"
+    "nan": "^2.14.0"
   },
   "devDependencies": {
     "browserify": "^16.5.0",
