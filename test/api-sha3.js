@@ -1,5 +1,3 @@
-'use strict'
-const Buffer = require('safe-buffer').Buffer
 const test = require('tape')
 
 const utf8text = 'УТФ-8 text'

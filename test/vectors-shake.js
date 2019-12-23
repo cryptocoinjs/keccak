@@ -1,4 +1,3 @@
-'use strict'
 const test = require('tape')
 const fs = require('fs')
 
@@ -8,8 +7,7 @@ module.exports = (name, createHash) => {
     const content = fs.readFileSync(filename, 'utf8')
     const lines = content.split('\n')
 
-    let count = 0
-    for (let i = 0; i < lines.length; ++i) {
+    for (let i = 0, count = 0; i < lines.length; ++i) {
       if (!lines[i].startsWith('Len')) continue
 
       const length = parseInt(lines[i].slice(6), 10)

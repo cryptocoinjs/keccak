@@ -1,6 +1,16 @@
-.PHONY: lint lint-js
+.PHONY: coverage coverage-lcov format format-cpp lint lint-cpp lint-js test unit
 
-format_cpp_files = src/addon.cc
+
+nyc = ./node_modules/.bin/nyc
+
+coverage:
+	$(nyc) node test/index.js
+
+coverage-lcov: coverage
+	$(nyc) report -r lcov
+
+
+format_cpp_files = ./src/addon.cc
 
 format: format-cpp
 
@@ -21,3 +31,10 @@ lint-cpp:
 
 lint-js:
 	$(standard)
+
+
+test: lint unit
+
+
+unit:
+	node test/index.js
