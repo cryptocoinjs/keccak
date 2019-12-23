@@ -1,1 +1,1 @@
-module.exports = require('./lib/api')(require('bindings')('keccak'))
+module.exports = require('./lib/api')(require('bindings')('addon'))

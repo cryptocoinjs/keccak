@@ -1,4 +1,11 @@
-.PHONY: coverage coverage-lcov format format-cpp lint lint-cpp lint-js test unit
+.PHONY: build-addon coverage coverage-lcov format format-cpp lint lint-cpp \
+	lint-js test unit
+
+
+node_gyp = ./node_modules/.bin/node-gyp
+
+build-addon:
+	$(node_gyp) rebuild
 
 
 nyc = ./node_modules/.bin/nyc
