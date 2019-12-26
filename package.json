@@ -40,7 +40,6 @@
   },
   "devDependencies": {
     "browserify": "^16.5.0",
-    "husky": "^3.1.0",
     "node-gyp": "^5.0.7",
     "nyc": "^15.0.0",
     "proxyquire": "^2.1.3",
