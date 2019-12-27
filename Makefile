@@ -1,11 +1,13 @@
 .PHONY: build-addon coverage coverage-lcov format format-cpp lint lint-cpp \
-	lint-cpp-ci lint-js test unit
+	lint-cpp-ci lint-js test test-tap
 
 
 prebuildify = ./node_modules/.bin/prebuildify
 
+# hack, otherwise GitHub Actions for Windows:
+#  '.' is not recognized as an internal or external command, operable program or batch file.
 build-addon:
-	$(prebuildify) --napi --strip
+	$(prebuildify) --target node@10.0.0 --napi --strip && node -p "process.platform"
 
 
 nyc = ./node_modules/.bin/nyc
@@ -46,8 +48,13 @@ lint-js:
 	$(standard)
 
 
-test: lint unit
+tape = ./node_modules/.bin/tape
+tap_reporter = ./node_modules/.bin/tap-dot
+test_files = test/index.js
 
+test:
+	$(tape) $(test_files) | $(tap_reporter)
 
-unit:
-	node test/index.js
+# See build-addon
+test-tap:
+	$(tape) $(test_files) && node -p "process.platform"

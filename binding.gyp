@@ -40,9 +40,7 @@
         './src/addon.cc'
       ],
       'include_dirs': [
-        # On Windows: Cannot open include file: 'napi.h': No such file or directory
-        '<!@(node -p \'require("node-addon-api").include\')',
-        # 'node_modules/node-addon-api',
+        '<!@(node -p "require(\'node-addon-api\').include")',
       ],
       'cflags!': [
         '-fno-exceptions',

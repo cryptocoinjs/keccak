@@ -5,7 +5,7 @@ module.exports = (name, createHash) => {
   for (const hash of ['shake128', 'shake256']) {
     const filename = require.resolve(`../util/XKCP/tests/TestVectors/ShortMsgKAT_${hash.toUpperCase()}.txt`)
     const content = fs.readFileSync(filename, 'utf8')
-    const lines = content.split('\n')
+    const lines = content.split('\n').map((x) => x.trim())
 
     for (let i = 0, count = 0; i < lines.length; ++i) {
       if (!lines[i].startsWith('Len')) continue
