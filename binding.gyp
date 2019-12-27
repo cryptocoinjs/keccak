@@ -2,20 +2,47 @@
   'variables': {
     'arch': '<!(node -p "process.arch")',
   },
+  'target_default': {
+    'cflags': [
+      '-Wall',
+      '-Wextra',
+    ],
+  },
   'targets': [
     {
+      'target_name': 'keccak',
+      'type': 'static_library',
+      'conditions': [
+        ['arch in ("arm64","ppc64","x64")',
+          # For known 64-bit architectures, use the implementation optimized for 64-bit CPUs.
+          {
+            'sources': [
+              './src/libkeccak-64/KeccakSpongeWidth1600.c',
+              './src/libkeccak-64/KeccakP-1600-opt64.c',
+            ],
+          },
+          # Otherwise, use the implementation optimized for 32-bit CPUs.
+          {
+            'sources': [
+              './src/libkeccak-32/KeccakSpongeWidth1600.c',
+              './src/libkeccak-32/KeccakP-1600-inplace32BI.c',
+            ],
+          },
+        ],
+      ],
+    },
+    {
       'target_name': 'addon',
+      'dependencies': [
+        'keccak',
+      ],
       'sources': [
         './src/addon.cc'
       ],
       'include_dirs': [
         # On Windows: Cannot open include file: 'napi.h': No such file or directory
-        # '<!@(node -p \'require("node-addon-api").include\')',
-        'node_modules/node-addon-api',
-      ],
-      'cflags': [
-        '-Wall',
-        '-Wextra',
+        '<!@(node -p \'require("node-addon-api").include\')',
+        # 'node_modules/node-addon-api',
       ],
       'cflags!': [
         '-fno-exceptions',
@@ -30,23 +57,11 @@
         ['arch in ("arm64","ppc64","x64")',
           # For known 64-bit architectures, use the implementation optimized for 64-bit CPUs.
           {
-            'sources': [
-              './src/libkeccak-64/KeccakSpongeWidth1600.c',
-              './src/libkeccak-64/KeccakP-1600-opt64.c',
-            ],
-            'defines': [
-              'LIBKECCAK=64',
-            ],
+            'include_dirs': [ 'src/libkeccak-64' ],
           },
           # Otherwise, use the implementation optimized for 32-bit CPUs.
           {
-            'sources': [
-              './src/libkeccak-32/KeccakSpongeWidth1600.c',
-              './src/libkeccak-32/KeccakP-1600-inplace32BI.c',
-            ],
-            'defines': [
-              'LIBKECCAK=32',
-            ],
+            'include_dirs': [ 'src/libkeccak-32' ],
           },
         ],
       ],
@@ -60,6 +75,6 @@
           'ExceptionHandling': 1,
         },
       },
-    }
-  ]
+    },
+  ],
 }

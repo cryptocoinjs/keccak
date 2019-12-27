@@ -1,1 +1,1 @@
-module.exports = require('./lib/api')(require('bindings')('addon'))
+module.exports = require('./lib/api')(require('node-gyp-build')(__dirname))

@@ -1,13 +1,7 @@
 #include <napi.h>
 
 extern "C" {
-#if LIBKECCAK == 32
-#include "libkeccak-32/KeccakSpongeWidth1600.h"
-#elif LIBKECCAK == 64
-#include "libkeccak-64/KeccakSpongeWidth1600.h"
-#else
-#error "LIBKECCAK not defined correctly"
-#endif
+#include <KeccakSpongeWidth1600.h>
 }
 
 class KeccakWrapper : public Napi::ObjectWrap<KeccakWrapper> {

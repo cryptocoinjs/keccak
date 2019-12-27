@@ -2,10 +2,10 @@
 	lint-js test unit
 
 
-node_gyp = ./node_modules/.bin/node-gyp
+prebuildify = ./node_modules/.bin/prebuildify
 
 build-addon:
-	$(node_gyp) rebuild
+	$(prebuildify) --napi --strip
 
 
 nyc = ./node_modules/.bin/nyc
