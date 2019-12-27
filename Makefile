@@ -1,5 +1,5 @@
 .PHONY: build-addon coverage coverage-lcov format format-cpp lint lint-cpp \
-	lint-js test unit
+	lint-cpp-ci lint-js test unit
 
 
 prebuildify = ./node_modules/.bin/prebuildify
@@ -35,6 +35,12 @@ lint-cpp:
 	rsync -a --delete src/ $(lint_dir)/cpp/src
 	cd $(lint_dir)/cpp && clang-format -i -verbose $(format_cpp_files)
 	git diff --no-index --exit-code src $(lint_dir)/cpp/src
+
+# `-verbose` not exists in clang-format@3.8
+# See https://github.com/actions/virtual-environments/issues/46
+lint-cpp-ci:
+	clang-format -i $(format_cpp_files)
+	git diff --exit-code --color=always
 
 lint-js:
 	$(standard)
