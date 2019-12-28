@@ -1,11 +1,5 @@
 # keccak
 
-Version | Mac/Linux | Windows
-------- | --------- | -------
-[![NPM Package](https://img.shields.io/npm/v/keccak.svg?style=flat-square)](https://www.npmjs.org/package/keccak) | [![Build Status](https://img.shields.io/travis/cryptocoinjs/keccak.svg?branch=master&style=flat-square)](https://travis-ci.org/cryptocoinjs/keccak) | [![AppVeyor](https://img.shields.io/appveyor/ci/fanatid/keccak.svg?branch=master&style=flat-square)](https://ci.appveyor.com/project/fanatid/keccak)
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
 This module provides native bindings to [Keccak sponge function family][1] from [Keccak Code Package][2]. In browser pure JavaScript implementation will be used.
 
 ## Usage
