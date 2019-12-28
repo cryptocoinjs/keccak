@@ -1,4 +1,3 @@
-'use strict'
 const test = require('tape')
 
 function main (name, createHash) {
