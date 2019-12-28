@@ -48,6 +48,36 @@ lint-js:
 	$(standard)
 
 
+package_dir = build/package
+package_include_dirs = \
+	lib \
+	prebuilds \
+	src
+package_include_files = \
+	binding.gyp \
+	LICENSE \
+	package.json \
+	README.md
+
+package: package-copy-files package-fix-packagejson package-pack package-copy
+
+package-copy-files:
+	mkdir -p $(package_dir)
+	for loc in $(package_include_dirs); do \
+		rsync -a --delete $$loc $(package_dir); \
+	done
+	cp $(package_include_files) $(package_dir)
+
+package-fix-packagejson:
+	util/package-fix-packagejson.js -f $(package_dir)/package.json
+
+package-pack:
+	cd $(package_dir) && npm pack
+
+package-copy:
+	cp $(package_dir)/keccak-`node -p "require('./package.json').version"`.tgz .
+
+
 tape = ./node_modules/.bin/tape
 tap_reporter = ./node_modules/.bin/tap-dot
 test_files = test/index.js
