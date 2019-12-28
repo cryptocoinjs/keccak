@@ -19,15 +19,6 @@
   "contributors": [
     "Kirill Fomichev <fanatid@ya.ru> (https://github.com/fanatid)"
   ],
-  "files": [
-    "lib",
-    "prebuilds",
-    "src",
-    "binding.gyp",
-    "bindings.js",
-    "index.js",
-    "js.js"
-  ],
   "main": "./index.js",
   "browser": {
     "./index.js": "./js.js"

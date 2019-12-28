@@ -55,6 +55,9 @@ package_include_dirs = \
 	src
 package_include_files = \
 	binding.gyp \
+	bindings.js \
+	index.js \
+	js.js \
 	LICENSE \
 	package.json \
 	README.md
