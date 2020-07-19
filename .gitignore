@@ -4,6 +4,7 @@ build
 node_modules
 prebuilds
 
+keccak-*.tgz
 npm-debug.log
 package-lock.json
 yarn-error.log
