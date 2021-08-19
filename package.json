@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "node-addon-api": "^2.0.0",
-    "node-gyp-build": "^4.2.0"
+    "node-gyp-build": "^4.2.0",
+    "readable-stream": "^3.6.0"
   },
   "devDependencies": {
     "browserify": "^16.5.0",
