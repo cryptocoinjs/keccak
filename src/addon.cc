@@ -12,7 +12,6 @@ class KeccakWrapper : public Napi::ObjectWrap<KeccakWrapper> {
 
  private:
   KeccakWidth1600_SpongeInstance sponge;
-  static Napi::FunctionReference constructor;
 
   Napi::Value Initialize(const Napi::CallbackInfo& info);
   Napi::Value Absorb(const Napi::CallbackInfo& info);
@@ -20,8 +19,6 @@ class KeccakWrapper : public Napi::ObjectWrap<KeccakWrapper> {
   Napi::Value Squeeze(const Napi::CallbackInfo& info);
   Napi::Value Copy(const Napi::CallbackInfo& info);
 };
-
-Napi::FunctionReference KeccakWrapper::constructor;
 
 Napi::Object KeccakWrapper::Init(Napi::Env env) {
   Napi::Function func =
@@ -35,9 +32,6 @@ Napi::Object KeccakWrapper::Init(Napi::Env env) {
                       InstanceMethod("squeeze", &KeccakWrapper::Squeeze),
                       InstanceMethod("copy", &KeccakWrapper::Copy),
                   });
-
-  constructor = Napi::Persistent(func);
-  constructor.SuppressDestruct();
 
   return func;
 }
